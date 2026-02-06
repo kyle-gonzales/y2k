@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+
+/* Perspective wrapper */
+.perspective {
+  perspective: 1200px;
+}
+
+/* Scrapbook page */
+.yuri {
+  width: 60px;
+  height: 180px;
+  background: #f8c8dc;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  transform-origin: left center;
+  animation: scrapbookTiltRight 3.5s ease-in-out infinite;
+}
+
+.kyle {
+  width: 80px;
+  height: 140px;
+  background: #f8c8dc;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  transform-origin: left center;
+  animation: scrapbookTiltLeft 3.5s ease-in-out infinite;
+}
+
+/* Scrapbook flip animation */
+@keyframes scrapbookFlip {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  20% {
+    transform: rotateY(-35deg);
+  }
+
+  40% {
+    transform: rotateY(-160deg);
+  }
+
+  55% {
+    transform: rotateY(-140deg);
+  }
+
+  70% {
+    transform: rotateY(-20deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes scrapbookTiltRight {
+  0% {
+    transform: rotateZ(6deg) rotateY(0deg);
+  }
+
+  25% {
+    transform: rotateY(1deg)
+  }
+
+  50% {
+    transform: rotateZ(-18deg) rotateY(-3deg);
+  }
+
+  75% {
+    transform: rotateY(-1)
+  }
+
+  100% {
+    transform: rotateZ(6deg) rotateY(0deg);
+  }
+}
+
+@keyframes scrapbookTiltLeft {
+  0% {
+    transform: rotateZ(6deg) rotateY(0deg);
+  }
+
+  25% {
+    transform: rotateY(1deg)
+  }
+
+  50% {
+    transform: rotateZ(-18deg) rotateY(-3deg);
+  }
+
+  75% {
+    transform: rotateY(-1)
+  }
+
+  100% {
+    transform: rotateZ(6deg) rotateY(0deg);
+  }
+}
