@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-gummy: "Sour Gummy", sans-serif;
+  --font-delius: "Delius Unicase", sans-serif;
+}
 
 /* Perspective wrapper */
 .perspective {
@@ -8,25 +12,28 @@
 
 /* Scrapbook page */
 .yuri {
-  width: 60px;
-  height: 180px;
-  background: #f8c8dc;
-  border-radius: 4px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-
-  transform-origin: left center;
+  transform-origin: center;
   animation: scrapbookTiltRight 3.5s ease-in-out infinite;
+  transform: scale(-50%);
 }
 
 .kyle {
-  width: 80px;
-  height: 140px;
-  background: #f8c8dc;
-  border-radius: 4px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform-origin: center;
+  animation: scrapbookTiltLeft 4.5s ease-in-out infinite;
+}
 
-  transform-origin: left center;
-  animation: scrapbookTiltLeft 3.5s ease-in-out infinite;
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100vh);
+  }
+}
+
+.animate-float {
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 /* Scrapbook flip animation */
@@ -80,22 +87,22 @@
 
 @keyframes scrapbookTiltLeft {
   0% {
-    transform: rotateZ(6deg) rotateY(0deg);
+    transform: rotateZ(-8deg) rotateY(0deg);
   }
 
   25% {
-    transform: rotateY(1deg)
+    transform: rotateY(-2deg)
   }
 
   50% {
-    transform: rotateZ(-18deg) rotateY(-3deg);
+    transform: rotateZ(20deg) rotateY(-3deg);
   }
 
   75% {
-    transform: rotateY(-1)
+    transform: rotateY(1deg)
   }
 
   100% {
-    transform: rotateZ(6deg) rotateY(0deg);
+    transform: rotateZ(-8deg) rotateY(0deg);
   }
 }

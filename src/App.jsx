@@ -11,6 +11,8 @@ export default function App() {
   const [text, setText] = useState(yesText);
 
   const trick = () => {
+    if (no !== 4) return;
+
     setText(prev => prev.map(t => {
       if (t === "NO") return "YES! AHA I GOT YOU"
       return t;
@@ -33,14 +35,13 @@ export default function App() {
       setTimeout(() => {
         setHearts(prevHearts => prevHearts.filter(heart => heart.id !== newHeart.id));
       }, newHeart.duration * 1000);
-    }, 1000);
+    }, 300);
 
     return () => clearInterval(interval);
   }, []);
 
 
   const moveButton = () => {
-    console.log(no);
     setNo(prev => prev+1);
     const padding = 80; // keeps button on screen
     const maxX = window.innerWidth - padding;
@@ -57,11 +58,11 @@ export default function App() {
   const yesScale = Math.min(1 + no * 0.25, 10);
 
   return (
-    <div className="min-h-screen bg-pink-100 flex items-center justify-center relative overflow-hidden">
-      <div className="relative bg-white rounded-2xl shadow-lg p-8 text-center w-96 z-10">
+    <div className="font-gummy min-h-screen bg-pink-100 flex items-center justify-center relative overflow-hidden text-gray-900">
+      <div className={`${accepted ? "absolute" : ""} bg-white rounded-2xl shadow-lg p-8 text-center w-96 z-10`}>
         {!accepted ? (
           <>
-            <h1 className="text-xl font-semibold mb-6 flex flex-col gap-2">
+            <h1 className="text-3xl font-semibold mb-6 flex flex-col gap-2">
               My sweet langga, will you be my valentine? 💕
               <span className="text-xs font-normal text-black/50">
                 (only if you want!)
@@ -93,13 +94,17 @@ export default function App() {
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-bold text-pink-600">
-              I knew you'd say yes! I can't wait to be with you, langga! I love you soooo 💕
-            </h1>
+            <div className="flex flex-col gap-2 items-center">
+              <h1 className="text-2xl font-bold text-pink-600">
+                I knew you'd say yes! I can't wait to be with you, langga! I love you soooo 💕
+              </h1>
+              <img src="/cute.gif" width={180} />
+
+            </div>
             {hearts.map(heart => (
               <div
                 key={heart.id}
-                className="absolute bottom-0 animate-float"
+                className="absolute -bottom-[300px]"
                 style={{
                   left: `${heart.left}%`,
                   animation: `float ${heart.duration}s linear`,
@@ -119,38 +124,22 @@ export default function App() {
         )}
 
       </div>
-
-
-      <style>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0);
-          }
-          100% {
-            transform: translateY(-100vh);
-          }
-        }
-
-        .animate-float {
-          animation-timing-function: linear;
-          animation-fill-mode: forwards;
-        }
-      `}</style>
     </div>
   );
 }
 
 function Yuri() {
   return (
-    <div className="absolute perspective -top-[140px] left-[20px]">
-      <div className="yuri" />
+    <div className="absolute -top-[140px] left-[10px]">
+      <img src="/yuri.png" width={180} className="yuri"/>
     </div>
   );
 }
 function Kyle() {
   return (
-    <div className="absolute perspective -top-[130px] right-[20px]">
-      <div className="kyle" />
+    <div className="absolute -top-[160px] right-[10px]">
+      <img src="/kyle.png" width={180} className="kyle"/>
+
     </div>
   );
 }
