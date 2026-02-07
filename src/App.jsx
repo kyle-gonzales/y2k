@@ -70,7 +70,7 @@ export default function App() {
           className="font-bold text-lg transition-transform duration-300 ease-out active:scale-95 active:translate-y-1 hover:scale-105 shadow-lg absolute"
           onClick={() => setStage("ask")}
         >
-          <img src="/letter.png" />
+          <img src="letter.png" />
         </button>
       )}
       <div className={`${stage !== "letter" ? "absolute" : ""} bg-white rounded-2xl shadow-lg p-8 text-center w-96 z-10 transition-all duration-500 ease-out
@@ -116,7 +116,7 @@ export default function App() {
               <h1 className="text-2xl font-bold text-pink-600">
                 I knew you'd say yes! I can't wait to be with you, langga! I love you soooo 💕
               </h1>
-              <img src="/cute.gif" width={180} />
+              <img src="cute.gif" width={180} />
 
             </div>
             {hearts.map(heart => (
@@ -148,14 +148,14 @@ export default function App() {
 function Yuri() {
   return (
     <div className="absolute -top-[140px] left-[10px]">
-      <img src="/yuri.png" width={180} className="yuri"/>
+      <img src="yuri.png" width={180} className="yuri"/>
     </div>
   );
 }
 function Kyle() {
   return (
     <div className="absolute -top-[160px] right-[10px]">
-      <img src="/kyle.png" width={180} className="kyle"/>
+      <img src="kyle.png" width={180} className="kyle"/>
 
     </div>
   );
