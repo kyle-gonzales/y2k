@@ -4,7 +4,7 @@ import { Heart } from "lucide-react";
 const yesText = ["Yes", "Pleasee", "Are you sure?", "sAY YES", "NO", "hay nako", "click me!", "come onnn, it'll be funnn!", "HELLO???", "stOP RUNNING AWAY FROM MEEE", "hay nakoo", "😔😔😔", "do you not love me?!?!", "I <3 KYLE FOREVER"];
 
 export default function App() {
-  const [accepted, setAccepted] = useState(false);
+  const [stage, setStage] = useState("letter");
   const [no, setNo] = useState(0);
   const [position, setPosition] = useState({ top: "60%", left: "55%" });
   const [hearts, setHearts] = useState([]);
@@ -40,27 +40,47 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const random = () => {
+    return Math.random() * 1.5 - 0.5
+  }
 
   const moveButton = () => {
     setNo(prev => prev+1);
-    const padding = 80; // keeps button on screen
-    const maxX = window.innerWidth - padding;
-    const maxY = window.innerHeight - padding;
+    const maxX = window.innerWidth - (window.innerWidth / 1.4);
+    const maxY = window.innerHeight - (window.innerHeight / 1.4);
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const x = random() * maxX;
+    const y = random() * maxY;
+
+    console.log(x)
+    console.log(y)
 
     setPosition({
       left: `${x}px`,
       top: `${y}px`,
     });
   };
+
   const yesScale = Math.min(1 + no * 0.25, 10);
 
   return (
     <div className="font-gummy min-h-screen bg-pink-100 flex items-center justify-center relative overflow-hidden text-gray-900">
-      <div className={`${accepted ? "absolute" : ""} bg-white rounded-2xl shadow-lg p-8 text-center w-96 z-10`}>
-        {!accepted ? (
+      {stage === "letter" && (
+        <button
+          className="font-bold text-lg transition-transform duration-300 ease-out active:scale-95 active:translate-y-1 hover:scale-105 shadow-lg absolute"
+          onClick={() => setStage("ask")}
+        >
+          <img src="/letter.png" />
+        </button>
+      )}
+      <div className={`${stage !== "letter" ? "absolute" : ""} bg-white rounded-2xl shadow-lg p-8 text-center w-96 z-10 transition-all duration-500 ease-out
+        ${stage === "ask"
+          ? "block opacity-100 scale-100 translate-y-0"
+          : stage === "letter"
+            ? "opacity-0 scale-90 translate-y-6 pointer-events-none"
+            : ""}`}
+      >
+        {stage === "ask" ? (
           <>
             <h1 className="text-3xl font-semibold mb-6 flex flex-col gap-2">
               My sweet langga, will you be my valentine? 💕
@@ -69,27 +89,25 @@ export default function App() {
               </span>
             </h1>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col gap-4 items-center">
               <button
-                className="font-semibold px-4 py-2 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition-transform duration-200 ease-out"
-                onClick={() => setAccepted(true)}
+                className="font-semibold px-6 text-lg py-2 rounded-full bg-pink-500 text-white hover:bg-pink-600 transition-transform duration-200 ease-out"
+                onClick={() => setStage("yay")}
                 style={{ transform: `scale(${yesScale})` }}
                 onMouseEnter={trick}
                 onTouchStart={trick}
               >
                 {text[Math.min(no, text.length-1)]}
               </button>
-              {!accepted && (
-                <button
-                  className={`${no > 0 ? "absolute" : "" } px-4 py-2 rounded-full bg-gray-200 text-gray-700 transition-all duration-200 font-semibold`}
-                  style={position}
-                  onMouseEnter={moveButton}
-                  onTouchStart={moveButton}
-                  tabIndex={-1}
-                >
-                  No
-                </button>
-              )}
+              <button
+                className={`${no > 0 ? "absolute" : "" } px-6 text-lg py-2 rounded-full bg-gray-200 text-gray-700 transition-all duration-200 font-semibold`}
+                style={position}
+                onMouseEnter={moveButton}
+                onTouchStart={moveButton}
+                tabIndex={-1}
+              >
+                No
+              </button>
             </div>
           </>
         ) : (
@@ -122,7 +140,6 @@ export default function App() {
             <Kyle />
           </>
         )}
-
       </div>
     </div>
   );
